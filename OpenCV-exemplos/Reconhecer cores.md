@@ -41,10 +41,19 @@ double d;
 std::string color = "unindentified";
 for(auto c : colors)
 {
-    d = cv::norm(c, m, cv::DIST_L2);
+    d = cv::norm(c, m);
     if(min_dist > d)
         color = c.first;
 }
 ```
 
 Assim, ao final do processo, `color` deve guardar o nome da cor mais compatível. Para mais detalhes, veja a documentação sobre a função `cv::norm`: [norm OpenCV docs](https://docs.opencv.org/4.5.3/d2/de8/group__core__array.html#ga55a581f0accd8d990af775d378e7e46c).
+
+No repo, nessa mesma pasta, se encontra um exemplo de detecção de um quadrado e determinação se sua cor é verde ou vermelho.
+
+## Problemas
+
+>* Seria possível calcular a distância entre os objetos `cv::Scalar` em si, mas isso tornaria pouco prático gerar as cores de referência no espaço `L*a*b*` já que a função de conversão de cores não se aplica com objetos `cv::Scalar` de argumento, e usar espaço o `RGB` para gerar cores como vermelho ou verde puros é direto.
+> * A função `cv::norm` aparentemente é pouco eficiente em relação a outros métodos (veja [distance of two points](https://stackoverflow.com/questions/38365900/using-opencv-norm-function-to-get-euclidean-distance-of-two-points)).
+
+Autor: Luke (T25)

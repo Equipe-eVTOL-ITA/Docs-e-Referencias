@@ -1,0 +1,7 @@
+#remove os executáveis
+*
+!*.*
+!*/
+
+#remove configs locais do vscode
+/.vscode
