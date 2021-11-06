@@ -27,20 +27,21 @@ O objeto `lab` gerado contém as informações da imagem convertida. Em seguida,
 
 ```c++
 cv::Scalar mean = cv::mean(lab, mask);
+cv::Mat m(1,1,lab.type(),mean);
 ```
-O valor de retorno da função `cv::mean` nesse caso é um objeto de `cv::Scalar`, classe usada para representar os *arrays* de valores dos canais de um *pixel* correspondente a uma imagem de dado tipo, ou seja, `cv::Scalar mean` guarda, essencialmente, um *pixel* com uma cor média da região recortada, mas desprovido de uma localização específica em uma imagem.
+O valor de retorno da função `cv::mean` nesse caso é um objeto de `cv::Scalar`, classe usada para representar os *arrays* de valores dos canais de um *pixel* correspondente a uma imagem de dado tipo, ou seja, `cv::Scalar mean` guarda, essencialmente, um *pixel* com uma cor média da região recortada, mas desprovido de uma localização específica em uma imagem, enquanto `m` representa uma imagem de resolução 1x1, cujo único *pixel* tem a cor de `mean`.
 
-Por fim, suponha que se queira determinar qual cor, de uma lista pré estabelecida, é mais compatível com a "cor média" obtida, e que as cores dessa lista estejam representadas por objetos `cv::Scalar` dessas cores segundo o espaço `L*a*b*`, em um dicionário `std::map<std::string, cv::Scalar> colors` com os nomes das cores, então, uma das formas mais simples de se fazer isso é determinando qual delas tem uma menor distância euclidiana de `m` (ver [CIE76](https://en.wikipedia.org/wiki/Color_difference#CIE76)).
+Por fim, suponha que se queira determinar qual cor, de uma lista pré estabelecida, é mais compatível com a "cor média" obtida, e que as cores dessa lista estejam representadas por imagens 1x1 nessas cores segundo o espaço `L*a*b*`, em um dicionário `std::map<std::string, cv::Mat> colors` com os nomes das cores, então, uma das formas mais simples de se fazer isso é determinando qual delas tem uma menor distância euclidiana de `m` (ver [CIE76](https://en.wikipedia.org/wiki/Color_difference#CIE76)).
 
 ```c++
 
-double min_dist = cv::norm(colors[0], mean);
+double min_dist = cv::norm(colors[0], m, cv::DIST_L2);
 
 double d;
 std::string color = "unindentified";
 for(auto c : colors)
 {
-    d = cv::norm(c, mean);
+    d = cv::norm(c, m, cv::DIST_L2);
     if(min_dist > d)
         color = c.first;
 }
