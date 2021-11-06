@@ -35,7 +35,7 @@ Por fim, suponha que se queira determinar qual cor, de uma lista pré estabeleci
 
 ```c++
 
-double min_dist = cv::norm(colors[0], m, cv::DIST_L2);
+double min_dist = cv::norm(colors[0], m);
 
 double d;
 std::string color = "unindentified";
