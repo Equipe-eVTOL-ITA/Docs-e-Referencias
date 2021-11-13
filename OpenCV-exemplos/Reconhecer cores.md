@@ -53,7 +53,7 @@ No repo, nessa mesma pasta, se encontra um exemplo de detecção de um quadrado 
 
 ## Problemas
 
->* Seria possível calcular a distância entre os objetos `cv::Scalar` em si, mas isso tornaria pouco prático gerar as cores de referência no espaço `L*a*b*` já que a função de conversão de cores não se aplica com objetos `cv::Scalar` de argumento, e usar espaço o `RGB` para gerar cores como vermelho ou verde puros é direto.
-> * A função `cv::norm` aparentemente é pouco eficiente em relação a outros métodos (veja [distance of two points](https://stackoverflow.com/questions/38365900/using-opencv-norm-function-to-get-euclidean-distance-of-two-points)).
+* Seria possível calcular a distância entre os objetos `cv::Scalar` em si, mas isso tornaria pouco prático gerar as cores de referência no espaço `L*a*b*` já que a função de conversão de cores não se aplica com objetos `cv::Scalar` de argumento, e usar espaço o `RGB` para gerar cores como vermelho ou verde puros é direto.
+* A função `cv::norm` aparentemente é pouco eficiente em relação a outros métodos (veja [distance of two points](https://stackoverflow.com/questions/38365900/using-opencv-norm-function-to-get-euclidean-distance-of-two-points)).
 
 Autor: Luke (T25)
