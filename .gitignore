@@ -2,5 +2,6 @@
 *
 !*.*
 !*/
+!Makefile
 #remove configs locais do vscode
 /.vscode
