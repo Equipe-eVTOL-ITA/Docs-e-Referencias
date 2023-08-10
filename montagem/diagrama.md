@@ -2,7 +2,7 @@
 
 Abaixo, pode-se visualizar um diagram esquemático de como montar o drone, quais são seus principais componentes e como eles são conectados entre si.
 
-![diagrama](assets/montagem_1.png)
+![diagrama](assets/montagem.png)
 
 Em resumo, os componentes necessários são:
 

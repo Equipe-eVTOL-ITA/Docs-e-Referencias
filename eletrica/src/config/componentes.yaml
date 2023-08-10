@@ -1,0 +1,53 @@
+energia_especifica: 150 # em Wh/kg
+
+motores:
+  - modelo: BL 2215/20
+    peso: 59.0
+    thrust_max: 1103
+    potencia_max: 228
+    corrente_max: 21
+    voltagem: 11.1
+  - modelo: XING-E PRO 2207 1800KV
+    peso: 33.8
+    thrust_max: 1598
+    potencia_max: 659.5
+    corrente_max: 27.48
+    voltagem: 24
+  - modelo: Avenger V3 900KV
+    peso: 76
+    thrust_max: 2406
+    potencia_max: 897.5
+    corrente_max: 35.9
+    voltagem: 25
+
+####################################
+## COMPONENTES QUE USAM A BATERIA ##
+####################################
+eletricos:
+  Raspberry Pi 4:
+    peso: 46
+    voltagem: 5.1
+    corrente_media: 3
+    corrente_max: 3
+
+  OAK-D Lite:
+    peso: 61
+    voltagem: 5
+    corrente_media: 0.9
+    corrente_max: 1.2
+
+
+##########################################
+## COMPONENTES COM PESO NÃO DESPREZÍVEL ##
+##########################################
+outros:
+  frame:
+    X450:
+      peso: 600
+    F450:
+      peso: 400
+  ESCs:
+    Padrão:
+      peso: 240 #coloque o peso dos 4 ESCs
+    
+
