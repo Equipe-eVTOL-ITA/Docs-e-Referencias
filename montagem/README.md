@@ -2,7 +2,7 @@
 
 Nessa seção, será apresentado como montar os componentes a fim de construir um drone autônomo.
 
-## COnteúdos
+## Conteúdos
 
 * [Diagrama](diagrama.md) - Diagrama esquemático e listagem dos componentes a fim de ter uma visão geral sobre a montagem.
 * [Conexão mecânica](mecanica.md) - Demonstração de como conectar fisicamente os componentes.

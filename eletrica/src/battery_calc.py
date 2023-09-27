@@ -10,8 +10,8 @@ class ProjetoBateria:
         with open('eletrica/src/config/componentes.yaml', 'r') as f:
             self.data = yaml.safe_load(f)
 
-        self.tempo = 1
         self.eletricos = []
+        self.tempo = 1
         self.outros = []
         self.payload = 0.0
         self.payload_tempo = 0.0
