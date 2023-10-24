@@ -13,6 +13,7 @@
 - [Teste de velocidade da conexão](#teste-de-velocidade-da-conexão)
 - [Extras](#extras)
 - [Local host](#local-host)
+- [Leituras futuras](#leituras-futuras)
 - [Referências](#referências)
 
 
@@ -344,6 +345,11 @@ iwconfig
 ## Local host
 
 ros2 topic pub -r 1 /msg std_msgs/String "data: 'Bora eVTOL'"
+
+## Leituras futuras
+
+https://github.com/brektrou/rtl8821CU/issues/5
+
 
 ## Referências 
 

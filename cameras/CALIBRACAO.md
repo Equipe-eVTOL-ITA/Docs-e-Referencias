@@ -1,27 +1,56 @@
 # Calibração de câmeras <!-- omit in toc -->
 
-- [Como usar](#como-usar)
-- [Instalação](#instalação)
-- [Dados necessários](#dados-necessários)
-  - [Crie o alvo de calibração](#crie-o-alvo-de-calibração)
-  - [Grave os dados de calibração](#grave-os-dados-de-calibração)
-  - [Conversão para ROS1](#conversão-para-ros1)
-- [Câmera](#câmera)
-- [Câmera + IMU](#câmera--imu)
+- [Camera calibration](#camera-calibration)
+  - [Instalação](#instalação)
+  - [Dados](#dados)
+    - [Alvo de calibração](#alvo-de-calibração)
+    - [(Opcional) Grave os dados](#opcional-grave-os-dados)
+  - [Mono RGB](#mono-rgb)
+  - [Stereo](#stereo)
+- [Kalibr](#kalibr)
+  - [Instalação](#instalação-1)
+  - [Dados necessários](#dados-necessários)
+    - [Crie o alvo de calibração](#crie-o-alvo-de-calibração)
+    - [Grave os dados de calibração](#grave-os-dados-de-calibração)
+    - [Conversão para ROS1](#conversão-para-ros1)
+  - [Câmera](#câmera)
+  - [Câmera + IMU](#câmera--imu)
 - [Referências](#referências)
 
 Pacote: camera_calibration
 
-## Como usar
+## Camera calibration
 
-- **`size`**: quantidade de vértices no interior do tabuleiro.
-- **`square`**: tamanho do quadrado do tabuleiro em metros.
+### Instalação
+
+### Dados
+
+#### Alvo de calibração
+
+#### (Opcional) Grave os dados
+
+### Mono RGB
 
 ```shell
-ros2 run camera_calibration cameracalibrator --size 6x8 --square 0.025 --ros-args -r image:=/my_camera/image_raw -p camera:=/my_camera
+ros2 launch depthai_ros_driver camera.launch.py params_file:=path/to/params.yaml
 ```
 
-## Instalação
+```shell
+ros2 run camera_calibration cameracalibrator --size 6x8 --square 0.025 --camera_name oak/rgb --no-service-check --ros-args -r image:=oak/rgb/image_raw -p camera:=/oak/rgb
+```
+
+### Stereo
+
+```shell
+ros2 run camera_calibration cameracalibrator --size 6x8 --square 0.025 --approximate 0.1 \
+  --no-service-check --ros-args \
+  -r left:=oak/left/image_raw -p camera:=/oak/left \
+  -r right:=oak/right/image_raw -p camera:=/oak/right
+```
+
+## Kalibr
+
+### Instalação
 
 Clone o repositório do pacote:
 
@@ -43,16 +72,17 @@ Defina a pasta em que serão armazenados os dados da calibração e inicie o con
 ```shell
 export FOLDER=<CAMINHO>/calibration_ws
 xhost +local:root
-docker run -it -e "DISPLAY" -e "QT_X11_NO_MITSHM=1" \
-    -v "/tmp/.X11-unix:/tmp/.X11-unix:rw" \
-    -v "$FOLDER:/data" kalibr
+docker run -it --net=host --ipc=host --pid=host --privileged \
+  --privileged -e DISPLAY -e QT_X11_NO_MITSHM=1 \
+  -v /tmp/.X11-unix:/tmp/.X11-unix \
+  -v "$FOLDER:/data" kalibr
 ```
 
 Esse processo demorou 12 minutos no meu computador.
 
-## Dados necessários
+### Dados necessários
 
-### Crie o alvo de calibração
+#### Crie o alvo de calibração
 
 Crie o arquivo pdf que será impresso e usado na calibração. O tutorial gera [esse]() arquivo.
 
@@ -74,7 +104,7 @@ Na pasta comṕartilhada, crie um arquivo YAML de configuração para esse tabul
 target_type: 'aprilgrid' 
 tagCols: 10               
 tagRows: 5               
-tagSize: 0.0456             # modifique essa parte           
+tagSize: 0.0456             ## modifique essa parte           
 tagSpacing: 0.3          
 ```
 
@@ -86,7 +116,7 @@ Para mais informações de como gerar o pdf, use o seguinte comando:
 rosrun kalibr kalibr_create_target_pdf --h
 ```
 
-### Grave os dados de calibração
+#### Grave os dados de calibração
 
 Vá até a pasta onde você está guardando os dados. Comece a gravar os tópicos.
 
@@ -101,7 +131,7 @@ ros2 bag record /oak/left/image_raw /oak/right/image_raw /oak/rgb/image_raw /oak
 ros2 bag record /camera/image_raw -o rasp_v_calibration
 ```
 
-### Conversão para ROS1
+#### Conversão para ROS1
 
 Para converter uma bag do ROS2 para o ROS1, você deve fazer o seguinte.
 
@@ -117,7 +147,7 @@ rosbags-convert <ROS2_BAG_FOLDER> --dst oak_rgbd_imu.bag --exclude-topic /oak/le
 rosbags-convert <ROS2_BAG_FOLDER> --dst oak_stereo_imu.bag --exclude-topic /oak/rgb/image_raw
 ```
 
-## Câmera
+### Câmera
 
 Para calibrar apenas a câmera, entre no container e rode os comandos:
 
@@ -142,7 +172,7 @@ rosrun kalibr kalibr_calibrate_cameras \
     --topics /oak/left/image_raw /oak/right/image_raw
 ```
 
-## Câmera + IMU
+### Câmera + IMU
 
 Antes de começar a calibração, você precisa obter alguns parâmetros dos sensores inerciais. Para isso, deixe o sensor parado em um local sem vibrações por pelo menos **três horas** (💀). Eu gravei esses dados por seis horas e salvei no Drive. Você pode achar em `Drive eVTOL ITA > Time de Drones > Calibração > imu_calibration_data.zip`. Converta a bag do ROS2 para o ROS1.
 
@@ -177,3 +207,13 @@ rosrun kalibr kalibr_calibrate_imu_camera \
 ## Referências
 
 [1](https://www.youtube.com/watch?app=desktop&v=puNXsnrYWTY) Vídeo exemplo
+
+[2](https://qiita.com/nindanaoto/items/20858eca08aad90b5bab#run-calibration) Calibração para ORB-SLAM3 com OAK-D.
+
+[3](https://github.com/ethz-asl/kalibr/wiki/Camera-IMU-calibration) Kalibr Camera-IMU Calibration.
+
+[4](https://github.com/ethz-asl/kalibr/wiki/ROS2-Calibration-Using-Kalibr) Kalibr com ROS2.
+
+[](https://github.com/ethz-asl/kalibr/wiki/installation) Kalibr com Docker.
+
+[](https://github.com/ori-drs/allan_variance_ros) IMU calibration.

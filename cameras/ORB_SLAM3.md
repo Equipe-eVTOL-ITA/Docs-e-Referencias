@@ -3,14 +3,16 @@
 - [Instalação](#instalação)
   - [Pangolin](#pangolin)
   - [ORB SLAM](#orb-slam)
+  - [ROS1 Wrapper + ROS1-ROS2 Bridge](#ros1-wrapper--ros1-ros2-bridge)
 - [Calibração](#calibração)
   - [Câmera](#câmera)
   - [IMU](#imu)
-- [Modos](#modos)
+- [Como usar](#como-usar)
   - [Stereo](#stereo)
   - [Stereo\_inertial](#stereo_inertial)
   - [RGB-D](#rgb-d)
   - [RGB-D\_inertial](#rgb-d_inertial)
+- [Referências](#referências)
 
 ## Instalação
 
@@ -46,6 +48,8 @@ sudo apt install ros-humble-vision-opencv && sudo apt install ros-humble-message
 cd ~/colcon_ws/src
 git clone https://github.com/zang09/ORB_SLAM3_ROS2.git orbslam3_ros2
 ```
+
+### ROS1 Wrapper + ROS1-ROS2 Bridge
 
 ## Calibração
 
@@ -159,13 +163,30 @@ Right: Camera2
 
 ### IMU
 
-## Modos
+## Como usar
 
-### Stereo
+Inicializar a câmera:
 
 ```shell
 ros2 launch depthai_ros_driver camera.launch.py params_file:=eVTOL/camera_ws/src/camera/camera_configuration/config/oakd/camera.yaml
 ```
+
+No Docker:
+```shell
+noetic
+roscore
+```
+
+```shell
+noetic
+foxy
+export ROS_MASTER_URI=http://localhost:11311
+ros2 run ros1_bridge dynamic_bridge
+```
+
+### Stereo
+
+Retificar as imagens:
 
 ```shell
 ros2 run image_proc image_proc --ros-args \
@@ -187,26 +208,33 @@ ros2 run image_proc image_proc --ros-args \
   -r image_rect/theora:=/oak/right/image_rect/theora
 ```
 
-```shell
-cd ~/eVTOL/camera_ws
-source install/setup.bash
-ros2 run orbslam3 stereo \
-  ~/eVTOL/ORB_SLAM3/Vocabulary/ORBvoc.txt \
-  ~/eVTOL/camera_ws/src/camera/camera_configuration/config/oakd/orb_slam_params.yaml false --ros-args \
-  -r camera/left:=/oak/left/image_rect \
-  -r camera/right:=/oak/right/image_rect
-```
+No Docker:
 
 ```shell
-ros2 run ros2_orbslam3 stereo \
-~/eVTOL/open_shade_orbslam3/ORB_SLAM3/Vocabulary/ORBvoc.txt \
-~/eVTOL/camera_ws/src/camera/camera_configuration/config/oakd/orb_slam_params.yaml false --ros-args \
--r orbslam3/camera/left:=/oak/left/image_rect \
--r orbslam3/camera/right:=/oak/right/image_rect
+roslaunch orbslam3_ros oakd_stereo.launch
 ```
 
 ### Stereo_inertial
 
 ### RGB-D
 
+Iniciar o SLAM:
+
+```shell
+cd ~/eVTOL/camera_ws
+source install/setup.bash
+
+ros2 run orbslam3 rgbd \
+  ~/eVTOL/open_shade_orbslam3/ORB_SLAM3/Vocabulary/ORBvoc.txt \
+  ~/eVTOL/camera_ws/src/camera/camera_configuration/config/oakd/rgbd_slam.yaml --ros-args \
+  -r camera/rgb:=/oak/rgb/image_raw \
+  -r camera/depth:=/oak/stereo/image_raw
+```
+
 ### RGB-D_inertial
+
+## Referências
+
+[1](https://github.com/thien94/orb_slam3_ros/tree/master) Implementação do ORB_SLAM3 para ROS1.
+
+[2](https://qiita.com/nindanaoto/items/20858eca08aad90b5bab#building-the-ros-wrapper-of-orb-slam3) Como calibrar câmera para SLAM.
