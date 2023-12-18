@@ -27,6 +27,8 @@ sudo apt install network-manager
 
 Você precisará deletar um arquivo e criar outro:
 
+IMPORTANTE: Você precisará de acesso a periféricos (teclado e monitor) para continuar essa etapa, pois ao remover o 50-cloud-init.yaml e reiniciar a Rasp, ela estará desconectada da internet, de forma que você não poderá fazer a conexão SSH com ela novamente (no caso de setup Headless).
+
 ```shell
 sudo rm /etc/netplan/50-cloud-init.yaml
 sudo nano /etc/netplan/01-network-manager-all.yaml
