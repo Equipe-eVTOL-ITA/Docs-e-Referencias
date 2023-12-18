@@ -27,7 +27,7 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-a
 Instale a base do Humble.
 
 ```shell
-sudo apt install ros-humble-ros-base
+sudo apt update && sudo apt install ros-humble-ros-base
 ```
 
 Instale as ferramentas de desenvolvimento.
