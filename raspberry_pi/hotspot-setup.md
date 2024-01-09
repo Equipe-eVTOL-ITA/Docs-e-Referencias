@@ -27,8 +27,6 @@ sudo apt install network-manager
 
 Você precisará deletar um arquivo e criar outro:
 
-IMPORTANTE: Você precisará de acesso a periféricos (teclado e monitor) para continuar essa etapa, pois ao remover o 50-cloud-init.yaml e reiniciar a Rasp, ela estará desconectada da internet, de forma que você não poderá fazer a conexão SSH com ela novamente (no caso de setup Headless).
-
 ```shell
 sudo rm /etc/netplan/50-cloud-init.yaml
 sudo nano /etc/netplan/01-network-manager-all.yaml
@@ -44,6 +42,8 @@ network:
 ```
 
 Reinicie a Raspberry. Para testar a instalação, rode `nmcli dev status`. Seu resultado deve ser similar ao seguinte:
+
+OBS: Se você tiver perdido acesso ao setup headless pois a Rasp não está mais se conectando ao wifi, acesse [esse tutorial](change-wifi.md)
 
 ```shell
 DEVICE      TYPE        STATE           CONNECTION
