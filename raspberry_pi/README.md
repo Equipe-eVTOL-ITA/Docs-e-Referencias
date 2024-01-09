@@ -10,3 +10,4 @@
 - [Configurar Raspberry Camera](rpi-cam-setup.md)
 - [Configurar OAK-D Pro](oakd-setup.md)
 - [Criar imagem personalizada](criar-iso.md)
+- [Mudar wifi de setup headless](change-wifi.md)
