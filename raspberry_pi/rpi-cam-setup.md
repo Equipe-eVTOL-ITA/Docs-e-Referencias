@@ -7,6 +7,14 @@ Vamos conectar a Rasp Cam (utilizei a Module 1.3) à Rasp e visualizar o videost
 - [Uso](#uso)
 - [Referências](#referências)
 
+## Sensor imx219
+```shel
+sudo nano /boot/firmware/config.txt
+
+#on config.txt
+camera_auto_detect=0
+dtoverlay=imx219
+```
 
 
 ## Checando suporte de Driver
