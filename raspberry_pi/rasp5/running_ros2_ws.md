@@ -3,7 +3,7 @@
 ### Comando para rodar o container com pix conectada:
 
 ```bash
-docker run -it --device=/dev/ttyACM0  --network host --privileged -v /dev:/dev setup_ok
+docker run -it --device=/dev/ttyACM0  --network host --privileged -v /dev:/dev -e LC_ALL=C.UTF-8 setup_ok
 ```
 
 ### Comando para rodar mavlink-router:
