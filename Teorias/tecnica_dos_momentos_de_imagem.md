@@ -263,7 +263,7 @@ Isso completa a demonstração, mostrando que a orientação é o ângulo que di
 
 ### Exemplo em Python (detecção de um caminho azul no chão)
 
-python
+```python
 class LaneDetector(Node):
 	def __init__(self):
 		super().__init__('lane_detector')
@@ -339,3 +339,4 @@ class LaneDetector(Node):
 		#cv2.imshow('mascara', binary_mask)
 		cv2.imshow('Lane Detection', output_image)
 		cv2.waitKey(1)
+```
