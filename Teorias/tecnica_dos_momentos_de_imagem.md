@@ -230,33 +230,52 @@ Esta fórmula utiliza a medida de "inclinação" ($\mu_{11}$) e as medidas de "d
 **Objetivo:** Encontrar o ângulo de rotação $\theta$ para um novo sistema de coordenadas $(u,v)$ no qual o momento misto $\mu'_{11}$ é zero.
 
 **1. Equações de Rotação:**
-Dado um sistema $(x', y')$ centrado no centroide ($x' = x-c_x$, $y' = y-c_y$), rotacionamos por $\theta$ para obter $(u,v)$:
+
+Dado um sistema $(x', y')$ centrado no centroide ($x' = x-c_x$, $y' = y-c_y$), rotacionamos por um ângulo $\theta$ para obter o novo sistema $(u,v)$:
+
 $$ u = x' \cos\theta + y' \sin\theta $$
 $$ v = -x' \sin\theta + y' \cos\theta $$
 
 **2. Definição do Novo Momento Misto:**
-Queremos encontrar o $\theta$ que satisfaz a condição:
+
+O objetivo é encontrar o ângulo $\theta$ que satisfaz a condição de que o novo momento misto, $\mu'_{11}$, seja nulo:
+
 $$ \mu'_{11} = \sum \sum u \cdot v \cdot I(x, y) = 0 $$
 
 **3. Substituição e Expansão:**
-Substituímos u e v na equação:
+
+Substituímos as expressões de $u$ e $v$ na equação do momento:
+
 $$ \mu'_{11} = \sum \sum (x' \cos\theta + y' \sin\theta)(-x' \sin\theta + y' \cos\theta) \cdot I(x, y) $$
-Expandindo o produto, obtemos:
+
+Expandindo o produto e reagrupando os termos, obtemos:
+
 $$ \mu'_{11} = \sum \sum [x'y'(\cos^2\theta - \sin^2\theta) + (y'^2 - x'^2)\sin\theta \cos\theta] \cdot I(x, y) $$
-Distribuindo a soma, reconhecemos os momentos centralizados originais:
+
+Ao distribuir a soma, reconhecemos os momentos centralizados originais:
+
 $$ \mu'_{11} = \mu_{11}(\cos^2\theta - \sin^2\theta) + (\mu_{02} - \mu_{20})\sin\theta \cos\theta $$
 
 **4. Simplificação com Identidades Trigonométricas:**
-Usando as identidades de ângulo duplo, $\cos(2\theta) = \cos^2\theta - \sin^2\theta$ e $\sin(2\theta) = 2\sin\theta\cos\theta$, a expressão se torna:
+
+Utilizando as identidades de ângulo duplo, $\cos(2\theta) = \cos^2\theta - \sin^2\theta$ e $\sin(2\theta) = 2\sin\theta\cos\theta$, a expressão se torna:
+
 $$ \mu'_{11} = \mu_{11}\cos(2\theta) + \frac{1}{2}(\mu_{02} - \mu_{20})\sin(2\theta) $$
 
 **5. Resolvendo para $\theta$:**
-Definimos $\mu'_{11} = 0$ e resolvemos a equação:
+
+Definimos $\mu'_{11} = 0$ e resolvemos a equação para o ângulo $\theta$:
+
 $$ 0 = \mu_{11}\cos(2\theta) + \frac{1}{2}(\mu_{02} - \mu_{20})\sin(2\theta) $$
+
 $$ -\mu_{11}\cos(2\theta) = \frac{1}{2}(\mu_{02} - \mu_{20})\sin(2\theta) $$
+
 Rearranjando para $\tan(2\theta) = \sin(2\theta)/\cos(2\theta)$:
+
 $$ \tan(2\theta) = \frac{-2\mu_{11}}{\mu_{02} - \mu_{20}} = \frac{2\mu_{11}}{\mu_{20} - \mu_{02}} $$
+
 Finalmente, isolando $\theta$:
+
 $$ \theta = \frac{1}{2} \arctan\left(\frac{2\mu_{11}}{\mu_{20} - \mu_{02}}\right) $$
 
 Isso completa a demonstração, mostrando que a orientação é o ângulo que diagonaliza a matriz de covariância da forma, alinhando os eixos de análise com a geometria intrínseca do objeto.
