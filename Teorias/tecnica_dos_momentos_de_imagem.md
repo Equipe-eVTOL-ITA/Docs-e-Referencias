@@ -250,15 +250,15 @@ $$ \mu'_{11} = \sum \sum (x' \cos\theta + y' \sin\theta)(-x' \sin\theta + y' \co
 
 Expandindo o produto e reagrupando os termos, obtemos:
 
-$$ \mu'_{11} = \sum \sum [x'y'(\cos^2\theta - \sin^2\theta) + (y'^2 - x'^2)\sin\theta \cos\theta] \cdot I(x, y) $$
+$$ \mu'_{11} = \sum \sum [x'y'(\cos\theta)^2 - (\sin\theta)^2) + (y'^2 - x'^2)\sin\theta \cos\theta] \cdot I(x, y) $$
 
 Ao distribuir a soma, reconhecemos os momentos centralizados originais:
 
-$$ \mu'_{11} = \mu_{11}(\cos^2\theta - \sin^2\theta) + (\mu_{02} - \mu_{20})\sin\theta \cos\theta $$
+$$ \mu'_{11} = \mu_{11}((\cos\theta)^2 - (\sin\theta)^2) + (\mu_{02} - \mu_{20})\sin\theta \cos\theta $$
 
 **4. Simplificação com Identidades Trigonométricas:**
 
-Utilizando as identidades de ângulo duplo, $\cos(2\theta) = \cos^2\theta - \sin^2\theta$ e $\sin(2\theta) = 2\sin\theta\cos\theta$, a expressão se torna:
+Usando as identidades de ângulo duplo, `cos(2θ) = (cosθ)² - (sinθ)²` e `sin(2θ) = 2 sin(θ) cos(θ)`, a expressão se torna:
 
 $$ \mu'_{11} = \mu_{11}\cos(2\theta) + \frac{1}{2}(\mu_{02} - \mu_{20})\sin(2\theta) $$
 
