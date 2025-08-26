@@ -2,4 +2,4 @@
 
 - [Raspberry Ethernet Telemetry Setup](raspberry_eth_telem.md): sends telemetry data from Pixhawk to Raspberry via Ethernet port, and from Raspberry to ground station (QGroundControl) via Mavlink-Router.
 
-- [Onboard Uart Telemetry Setup](OnBoard_uart_telem.md): sends telemetry data from Pixhawk to Raspberry/Jetson via Uart port (serial connection), and from Raspberry/Jetson to ground station (QGroundControl) via Mavlink-Router.
+- [Onboard Uart Telemetry Setup](onBoard_uart_telem.md): sends telemetry data from Pixhawk to Raspberry/Jetson via Uart port (serial connection), and from Raspberry/Jetson to ground station (QGroundControl) via Mavlink-Router.
